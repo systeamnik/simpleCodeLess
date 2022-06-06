@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:nursik/generated/l10n.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,9 +26,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final delegate = S.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Главный экран"),
+        title: Text(delegate.mainScreenTitle),
       ),
       body: Column(
         children: <Widget>[
@@ -34,9 +38,43 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Значение счетчика:',
-                  style: TextStyle(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(delegate.language + ': '),
+                    DropdownButton<String>(
+                      value: Intl.getCurrentLocale(),
+                      items: [
+                        DropdownMenuItem(
+                          value: 'en',
+                          child: Text(delegate.english),
+                        ),
+                        DropdownMenuItem(
+                          value: 'ru_RU',
+                          child: Text(delegate.russian),
+                        ),
+                      ],
+                      onChanged: (value) async {
+                        if (value == 'ru_RU') {
+                          await S.load(
+                            const Locale('ru', 'RU'),
+                          );
+                          setState(() {});
+                        } else if (value == 'en') {
+                          await S.load(
+                            const Locale('en'),
+                          );
+                          setState(() {});
+                        }
+                      },
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Text(
+                  // 'Значение счетчика:',
+                  delegate.counterValue,
+                  style: const TextStyle(
                     fontSize: 17,
                   ),
                 ),
@@ -44,6 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   '$_counter',
                   style: Theme.of(context).textTheme.headline3,
                 ),
+                const Spacer(),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nursik/generated/l10n.dart';
 import 'package:nursik/ui/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -65,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Авторизация"),
+          title: Text(S.of(context).auth),
         ),
         body: bodyWidgets(context),
       ),
@@ -73,6 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Padding bodyWidgets(BuildContext context) {
+    final delegate = S.of(context);
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Form(
@@ -81,20 +83,21 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Spacer(),
-            const Text(
-              "Введите логин и пароль",
-              style: TextStyle(
+            Text(
+              delegate.inputLoginAndPassword,
+              // "Введите логин и пароль",
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
             TextFormField(
               maxLength: 8,
-              decoration: const InputDecoration(
-                hintText: 'Логин',
+              decoration: InputDecoration(
+                hintText: delegate.login,
               ),
               validator: (String? value) {
                 if (value == null || value.isEmpty || value.length < 4) {
-                  return 'Логин должен содержать не менее 3 символов';
+                  return delegate.inputErrorLoginInShort;
                 }
                 return null;
               },
@@ -105,12 +108,12 @@ class _LoginScreenState extends State<LoginScreen> {
             TextFormField(
               maxLength: 16,
               obscureText: true,
-              decoration: const InputDecoration(
-                hintText: 'Пароль',
+              decoration: InputDecoration(
+                hintText: delegate.password,
               ),
               validator: (String? value) {
                 if (value == null || value.isEmpty || value.length < 8) {
-                  return 'Пароль должен содержать не менее 8 символов';
+                  return delegate.inputErrorPasswordInShort;
                 }
                 return null;
               },
@@ -125,8 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text("Вход"),
+                children: [
+                  Text(delegate.signIn),
                 ],
               ),
             )

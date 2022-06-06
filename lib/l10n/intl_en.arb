@@ -1,0 +1,16 @@
+{
+    "mainScreenTitle": "Main screen",
+    "counterValue": "Counter value",
+    "tryAgain": "Try again",
+    "close": "Close",
+    "auth": "Authorization",
+    "login": "Login",
+    "password": "Password",
+    "inputLoginAndPassword": "Enter your login and password",
+    "inputErrorLoginInShort": "Login must provide at least 3 characters",
+    "inputErrorPasswordInShort": "Password must be at least 8 characters",
+    "signIn": "Sign In",
+    "language": "Language",
+    "english": "English",
+    "russian": "Russian"
+}
