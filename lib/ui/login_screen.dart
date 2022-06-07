@@ -129,7 +129,11 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(delegate.signIn),
+                  Expanded(
+                    child: Text(
+                        "dwdwdw dwdwdwdw dwdwd dwdwdwdwd dwdwdwdwdwdwdw " +
+                            delegate.signIn),
+                  ),
                 ],
               ),
             )
