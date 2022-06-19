@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nursik/generated/l10n.dart';
-import 'package:nursik/ui/home_screen.dart';
+import 'package:nursik/ui/persons_screen/person_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
+            builder: (context) => const PersonScreen(),
           ),
         );
       } else {
@@ -130,9 +130,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: Text(
-                        "dwdwdw dwdwdwdw dwdwd dwdwdwdwd dwdwdwdwdwdwdw " +
-                            delegate.signIn),
+                    child: Center(
+                      child: Text(
+                        delegate.signIn,
+                      ),
+                    ),
                   ),
                 ],
               ),

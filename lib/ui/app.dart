@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:nursik/generated/l10n.dart';
-import 'package:nursik/ui/login_screen.dart';
+// import 'package:nursik/ui/login_screen.dart';
+import 'package:nursik/ui/persons_screen/person_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       ],
       locale: const Locale('ru', 'RU'),
       supportedLocales: S.delegate.supportedLocales,
-      home: const LoginScreen(),
+      home: const PersonScreen(),
     );
   }
 }

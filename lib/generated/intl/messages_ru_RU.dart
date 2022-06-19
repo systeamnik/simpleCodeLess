@@ -26,7 +26,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "close": MessageLookupByLibrary.simpleMessage("Закрыть"),
         "counterValue":
             MessageLookupByLibrary.simpleMessage("Значение счетчика"),
+        "dead": MessageLookupByLibrary.simpleMessage("Мертвый"),
         "english": MessageLookupByLibrary.simpleMessage("Английский"),
+        "findPerson": MessageLookupByLibrary.simpleMessage("Найти персонажа"),
         "inputErrorLoginInShort": MessageLookupByLibrary.simpleMessage(
             "Логин должен содержать не менее 3 символов"),
         "inputErrorPasswordInShort": MessageLookupByLibrary.simpleMessage(
@@ -34,12 +36,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "inputLoginAndPassword":
             MessageLookupByLibrary.simpleMessage("Введите логин и пароль"),
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
+        "live": MessageLookupByLibrary.simpleMessage("Живой"),
         "login": MessageLookupByLibrary.simpleMessage("Логин"),
         "mainScreenTitle":
             MessageLookupByLibrary.simpleMessage("Главный экран"),
+        "man": MessageLookupByLibrary.simpleMessage("Мужской"),
         "password": MessageLookupByLibrary.simpleMessage("Пароль"),
+        "people": MessageLookupByLibrary.simpleMessage("Человек"),
+        "personCount": MessageLookupByLibrary.simpleMessage("Всего персонажей"),
+        "personScreenTitle":
+            MessageLookupByLibrary.simpleMessage("Список персонажей"),
         "russian": MessageLookupByLibrary.simpleMessage("Русский"),
         "signIn": MessageLookupByLibrary.simpleMessage("Вход"),
-        "tryAgain": MessageLookupByLibrary.simpleMessage("Попробуйте снова")
+        "tryAgain": MessageLookupByLibrary.simpleMessage("Попробуйте снова"),
+        "woman": MessageLookupByLibrary.simpleMessage("Женский")
       };
 }

@@ -25,7 +25,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "auth": MessageLookupByLibrary.simpleMessage("Authorization"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "counterValue": MessageLookupByLibrary.simpleMessage("Counter value"),
+        "dead": MessageLookupByLibrary.simpleMessage("Dead"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
+        "findPerson": MessageLookupByLibrary.simpleMessage("Find a character"),
         "inputErrorLoginInShort": MessageLookupByLibrary.simpleMessage(
             "Login must provide at least 3 characters"),
         "inputErrorPasswordInShort": MessageLookupByLibrary.simpleMessage(
@@ -33,11 +35,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "inputLoginAndPassword": MessageLookupByLibrary.simpleMessage(
             "Enter your login and password"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "live": MessageLookupByLibrary.simpleMessage("Live"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "mainScreenTitle": MessageLookupByLibrary.simpleMessage("Main screen"),
+        "man": MessageLookupByLibrary.simpleMessage("Male"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "people": MessageLookupByLibrary.simpleMessage("People"),
+        "personCount": MessageLookupByLibrary.simpleMessage("Total characters"),
+        "personScreenTitle":
+            MessageLookupByLibrary.simpleMessage("List of characters"),
         "russian": MessageLookupByLibrary.simpleMessage("Russian"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
-        "tryAgain": MessageLookupByLibrary.simpleMessage("Try again")
+        "tryAgain": MessageLookupByLibrary.simpleMessage("Try again"),
+        "woman": MessageLookupByLibrary.simpleMessage("Female")
       };
 }

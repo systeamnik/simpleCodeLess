@@ -189,6 +189,86 @@ class S {
       args: [],
     );
   }
+
+  /// `List of characters`
+  String get personScreenTitle {
+    return Intl.message(
+      'List of characters',
+      name: 'personScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Find a character`
+  String get findPerson {
+    return Intl.message(
+      'Find a character',
+      name: 'findPerson',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total characters`
+  String get personCount {
+    return Intl.message(
+      'Total characters',
+      name: 'personCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Live`
+  String get live {
+    return Intl.message(
+      'Live',
+      name: 'live',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dead`
+  String get dead {
+    return Intl.message(
+      'Dead',
+      name: 'dead',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `People`
+  String get people {
+    return Intl.message(
+      'People',
+      name: 'people',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Male`
+  String get man {
+    return Intl.message(
+      'Male',
+      name: 'man',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Female`
+  String get woman {
+    return Intl.message(
+      'Female',
+      name: 'woman',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
