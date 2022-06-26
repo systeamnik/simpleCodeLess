@@ -32,6 +32,12 @@ class AppStyles {
     color: AppColors.avatarTitle,
   );
 
+  static const s14w400 = TextStyle(
+    fontSize: 14.0,
+    fontWeight: FontWeight.w400,
+    color: AppColors.formInputTitle,
+  );
+
   static const s12w400 = TextStyle(
     fontSize: 12.0,
     fontWeight: FontWeight.w400,
@@ -42,5 +48,41 @@ class AppStyles {
     fontSize: 16.0,
     fontWeight: FontWeight.w400,
     color: AppColors.formPlacehorder,
+  );
+
+  static const s20w500 = TextStyle(
+    fontSize: 20.0,
+    fontWeight: FontWeight.w500,
+    color: AppColors.formInputTitle,
+    letterSpacing: 0.15,
+  );
+
+  static const s16w400button = TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.w400,
+    color: AppColors.formInputLightText,
+    letterSpacing: 0.15,
+  );
+
+  static const bottomAppBarTitleSize = 12.0;
+
+  static ButtonStyle buttomStyle = ButtonStyle(
+    backgroundColor:
+        MaterialStateProperty.all<Color>(AppColors.buttonBackground),
+    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+    ),
+  );
+
+  static ButtonStyle buttomStyleRounded = OutlinedButton.styleFrom(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12.0),
+    ),
+    side: const BorderSide(
+      width: 1,
+      color: AppColors.buttonBackground,
+    ),
   );
 }

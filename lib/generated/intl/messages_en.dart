@@ -23,10 +23,17 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "auth": MessageLookupByLibrary.simpleMessage("Authorization"),
+        "authErrorMessage": MessageLookupByLibrary.simpleMessage(
+            "Invalid username or password entered"),
+        "character": MessageLookupByLibrary.simpleMessage("Characters"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "counterValue": MessageLookupByLibrary.simpleMessage("Counter value"),
+        "createAccount": MessageLookupByLibrary.simpleMessage("Create"),
         "dead": MessageLookupByLibrary.simpleMessage("Dead"),
+        "dontHaveAccount":
+            MessageLookupByLibrary.simpleMessage("Don\'t have an account yet?"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
+        "error": MessageLookupByLibrary.simpleMessage("Error"),
         "findPerson": MessageLookupByLibrary.simpleMessage("Find a character"),
         "inputErrorLoginInShort": MessageLookupByLibrary.simpleMessage(
             "Login must provide at least 3 characters"),
@@ -39,12 +46,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "mainScreenTitle": MessageLookupByLibrary.simpleMessage("Main screen"),
         "man": MessageLookupByLibrary.simpleMessage("Male"),
+        "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "people": MessageLookupByLibrary.simpleMessage("People"),
         "personCount": MessageLookupByLibrary.simpleMessage("Total characters"),
         "personScreenTitle":
             MessageLookupByLibrary.simpleMessage("List of characters"),
         "russian": MessageLookupByLibrary.simpleMessage("Russian"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("Try again"),
         "woman": MessageLookupByLibrary.simpleMessage("Female")

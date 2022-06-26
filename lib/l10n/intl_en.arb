@@ -21,6 +21,15 @@
     "dead": "Dead",
     "people": "People",
     "man": "Male",
-    "woman": "Female"
+    "woman": "Female",
+
+    "error": "Error",
+    "ok": "Ok",
+    "dontHaveAccount": "Don't have an account yet?",
+    "createAccount": "Create",
+    "authErrorMessage": "Invalid username or password entered",
+
+    "character": "Characters",
+    "settings": "Settings"
 
 }

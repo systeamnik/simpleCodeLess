@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nursik/constants/app_assets.dart';
 import 'package:nursik/constants/app_styles.dart';
-import 'package:nursik/ui/persons_screen/person_screen.dart';
+import 'package:nursik/dto/person_data.dart';
 
 class ListViewWidget extends StatelessWidget {
   const ListViewWidget({
@@ -14,21 +14,19 @@ class ListViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       itemCount: personsList.length,
       separatorBuilder: (BuildContext context, int index) {
-        return const SizedBox(height: 24);
+        return const SizedBox(height: 8);
       },
       itemBuilder: (BuildContext context, int index) {
         return Row(
           children: [
-            SizedBox(
-              width: 74,
-              height: 74,
-              child: CircleAvatar(
-                backgroundImage: AssetImage(AppAssets.images.noAvatar),
-              ),
+            CircleAvatar(
+              radius: MediaQuery.of(context).size.width * .12,
+              backgroundImage: AssetImage(AppAssets.images.noAvatar),
             ),
-            const SizedBox(width: 18),
+            const SizedBox(width: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -38,10 +36,12 @@ class ListViewWidget extends StatelessWidget {
                       ? AppStyles.s10w500StatusLive
                       : AppStyles.s10w500StatusDead,
                 ),
+                const SizedBox(height: 7),
                 Text(
                   personsList[index].name,
                   style: AppStyles.s16w500,
                 ),
+                const SizedBox(height: 7),
                 Text(
                   personsList[index].race + ", " + personsList[index].gender,
                   style: AppStyles.s12w400,

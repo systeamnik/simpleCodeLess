@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nursik/constants/app_assets.dart';
 import 'package:nursik/constants/app_styles.dart';
-import 'package:nursik/ui/persons_screen/person_screen.dart';
+import 'package:nursik/dto/person_data.dart';
 
 class GridViewWidget extends StatelessWidget {
   const GridViewWidget({Key? key, required this.personsList}) : super(key: key);
@@ -11,6 +11,7 @@ class GridViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       crossAxisCount: 2,
       mainAxisSpacing: 24.0,
       crossAxisSpacing: 16.0,

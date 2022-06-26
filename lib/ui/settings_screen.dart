@@ -1,36 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:nursik/constants/app_colors.dart';
 import 'package:nursik/generated/l10n.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void _decrementCounter() {
-    setState(() {
-      _counter--;
-    });
-  }
-
+class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final delegate = S.of(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(delegate.mainScreenTitle),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: false,
+        title: Text(
+          delegate.settings,
+          style: const TextStyle(
+            color: AppColors.appBarTitle,
+          ),
+        ),
       ),
       body: Column(
         children: <Widget>[
@@ -70,47 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                const Spacer(),
-                Text(
-                  // 'Значение счетчика:',
-                  delegate.counterValue,
-                  style: const TextStyle(
-                    fontSize: 17,
-                  ),
-                ),
-                Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-                const Spacer(),
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(
-                onPressed: _incrementCounter,
-                child: const Text(
-                  "+",
-                  style: TextStyle(
-                    fontSize: 22,
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: _decrementCounter,
-                child: const Text(
-                  "-",
-                  style: TextStyle(
-                    fontSize: 22,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 40,
           ),
         ],
       ),

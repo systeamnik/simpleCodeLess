@@ -23,11 +23,18 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "auth": MessageLookupByLibrary.simpleMessage("Авторизация"),
+        "authErrorMessage": MessageLookupByLibrary.simpleMessage(
+            "Введен неверные логин или пароль"),
+        "character": MessageLookupByLibrary.simpleMessage("Персонажи"),
         "close": MessageLookupByLibrary.simpleMessage("Закрыть"),
         "counterValue":
             MessageLookupByLibrary.simpleMessage("Значение счетчика"),
+        "createAccount": MessageLookupByLibrary.simpleMessage("Создать"),
         "dead": MessageLookupByLibrary.simpleMessage("Мертвый"),
+        "dontHaveAccount":
+            MessageLookupByLibrary.simpleMessage("У вас еще нет аккаунта?"),
         "english": MessageLookupByLibrary.simpleMessage("Английский"),
+        "error": MessageLookupByLibrary.simpleMessage("Ошибка"),
         "findPerson": MessageLookupByLibrary.simpleMessage("Найти персонажа"),
         "inputErrorLoginInShort": MessageLookupByLibrary.simpleMessage(
             "Логин должен содержать не менее 3 символов"),
@@ -41,13 +48,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "mainScreenTitle":
             MessageLookupByLibrary.simpleMessage("Главный экран"),
         "man": MessageLookupByLibrary.simpleMessage("Мужской"),
+        "ok": MessageLookupByLibrary.simpleMessage("Ок"),
         "password": MessageLookupByLibrary.simpleMessage("Пароль"),
         "people": MessageLookupByLibrary.simpleMessage("Человек"),
         "personCount": MessageLookupByLibrary.simpleMessage("Всего персонажей"),
         "personScreenTitle":
             MessageLookupByLibrary.simpleMessage("Список персонажей"),
         "russian": MessageLookupByLibrary.simpleMessage("Русский"),
-        "signIn": MessageLookupByLibrary.simpleMessage("Вход"),
+        "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
+        "signIn": MessageLookupByLibrary.simpleMessage("Войти"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("Попробуйте снова"),
         "woman": MessageLookupByLibrary.simpleMessage("Женский")
       };

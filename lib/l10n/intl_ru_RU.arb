@@ -9,7 +9,7 @@
     "inputLoginAndPassword": "Введите логин и пароль",
     "inputErrorLoginInShort": "Логин должен содержать не менее 3 символов",
     "inputErrorPasswordInShort": "Пароль должен содержать не менее 8 символов",
-    "signIn": "Вход",
+    "signIn": "Войти",
     "language": "Язык",
     "english": "Английский",
     "russian": "Русский",
@@ -21,5 +21,17 @@
     "dead" : "Мертвый",
     "people" : "Человек",
     "man": "Мужской",
-    "woman": "Женский"
+    "woman": "Женский",
+
+    "error": "Ошибка",
+    "ok": "Ок",
+    "dontHaveAccount": "У вас еще нет аккаунта?",
+    "createAccount": "Создать",
+    "authErrorMessage" : "Введен неверные логин или пароль",
+
+    "character": "Персонажи",
+    "settings": "Настройки"
+
+    
+
 }
