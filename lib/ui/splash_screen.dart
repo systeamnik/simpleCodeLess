@@ -13,15 +13,15 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   void timeout() {
     const duration = Duration(seconds: 2);
-    Future.delayed(duration, () {
-      setState(() {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const LoginScreen(),
-          ),
-        );
-      });
+    Future.delayed(
+      duration,
+    ).whenComplete(() {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const LoginScreen(),
+        ),
+      );
     });
   }
 
