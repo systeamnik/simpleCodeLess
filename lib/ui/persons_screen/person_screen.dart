@@ -4,47 +4,46 @@ import 'package:nursik/constants/app_assets.dart';
 import 'package:nursik/constants/app_colors.dart';
 import 'package:nursik/constants/app_styles.dart';
 import 'package:nursik/generated/l10n.dart';
+import 'package:nursik/service/repo_persons.dart';
+import 'package:nursik/ui/persons_screen/view_model/person_screen_view_model.dart';
 import 'package:nursik/ui/persons_screen/widgets/persons_page_widget.dart';
 import 'package:nursik/ui/settings_screen.dart';
+import 'package:provider/provider.dart';
 
-class PersonScreen extends StatefulWidget {
+class PersonScreen extends StatelessWidget {
   const PersonScreen({Key? key}) : super(key: key);
 
-  @override
-  State<PersonScreen> createState() => _PersonScreenState();
-}
-
-class _PersonScreenState extends State<PersonScreen> {
-  int _selectedIndex = 0;
-  PageController pageController = PageController();
-
-  void onTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    pageController.jumpToPage(index);
+  Widget create() {
+    return ChangeNotifierProvider(
+      create: (context) => PersonScreenViewModel(
+        repo: Provider.of<RepoPersons>(context, listen: false),
+      ),
+      child: const PersonScreen(),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final model = context.watch<PersonScreenViewModel>();
     final delegate = S.of(context);
+
     return Scaffold(
       backgroundColor: AppColors.screenBackgroundLight,
       body: SafeArea(
         child: PageView(
-          controller: pageController,
-          children: const [
-            PersonsPageWidget(),
-            SettingsScreen(),
+          controller: model.pageController,
+          children: [
+            const PersonsPageWidget().create(),
+            const SettingsScreen(),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedFontSize: AppStyles.bottomAppBarTitleSize,
         unselectedFontSize: AppStyles.bottomAppBarTitleSize,
-        onTap: onTapped,
+        onTap: model.onTapped,
         type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
+        currentIndex: model.selectedIndex,
         items: [
           BottomNavigationBarItem(
             activeIcon: Padding(

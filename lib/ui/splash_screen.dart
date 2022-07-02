@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nursik/constants/app_assets.dart';
+import 'package:nursik/generated/l10n.dart';
+import 'package:nursik/service/repo_settings.dart';
 import 'package:nursik/ui/login_screen/login_screen.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -13,6 +16,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   void timeout() {
     const duration = Duration(seconds: 2);
+
     Future.delayed(
       duration,
     ).whenComplete(() {
@@ -27,7 +31,20 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    timeout();
+    final repoSettings = Provider.of<RepoSettings>(
+      context,
+      listen: false,
+    );
+    repoSettings.init().whenComplete(() async {
+      var defaultLocale = const Locale('ru', 'RU');
+      final locale = await repoSettings.readLocale();
+      if (locale == 'en') {
+        defaultLocale = const Locale('en');
+      }
+      S.load(defaultLocale).whenComplete(() {
+        timeout();
+      });
+    });
     super.initState();
   }
 

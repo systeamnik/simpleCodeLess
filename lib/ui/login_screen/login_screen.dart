@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:nursik/constants/app_assets.dart';
 import 'package:nursik/constants/app_colors.dart';
 import 'package:nursik/constants/app_styles.dart';
 import 'package:nursik/generated/l10n.dart';
+import 'package:nursik/ui/app_widgets/alert_dialog_widget.dart';
+import 'package:nursik/ui/login_screen/widgets/login_form_widget.dart';
+import 'package:nursik/ui/login_screen/widgets/password_form_widget.dart';
 import 'package:nursik/ui/persons_screen/person_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -30,72 +32,30 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void setPassword(String value) {
     setState(() {
-      password = value;
+      password = passwordController.text;
+    });
+  }
+
+  void toggleObscureText(bool value) {
+    setState(() {
+      passwordVisible = value;
     });
   }
 
   void authButtonPressed(BuildContext context) {
     FocusScope.of(context).unfocus();
     final isValidForm = formKey.currentState?.validate();
-    if (isValidForm == null) return;
-    if (isValidForm) {
+    if (isValidForm ?? false) {
       if (login == 'qwerty' && password == '123456ab') {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => const PersonScreen(),
+            builder: (context) => const PersonScreen().create(),
           ),
           (route) => false,
         );
       } else {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(12.0),
-                ),
-              ),
-              contentPadding: const EdgeInsets.all(30.0),
-              title: Text(
-                S.of(context).error,
-                style: AppStyles.s20w500,
-              ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    S.of(context).authErrorMessage,
-                    style: AppStyles.s14w400,
-                  ),
-                  const SizedBox(height: 24),
-                  SizedBox(
-                    height: 48,
-                    child: OutlinedButton(
-                      style: AppStyles.buttomStyleRounded,
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Center(
-                              child: Text(
-                                S.of(context).ok,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
+        showAlertDialog(context);
       }
     }
   }
@@ -151,36 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: AppStyles.s14w400,
                     ),
                   ),
-                  TextFormField(
-                    maxLength: 8,
-                    decoration: InputDecoration(
-                      counterText: "",
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                        ),
-                        child: SvgPicture.asset(
-                          AppAssets.svg.iconAccount,
-                          color: AppColors.icon,
-                        ),
-                      ),
-                      filled: true,
-                      fillColor: AppColors.formBackground,
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      hintText: delegate.login,
-                    ),
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty || value.length < 4) {
-                        return delegate.inputErrorLoginInShort;
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      setLogin(value);
-                    },
+                  LoginFormWidget(
+                    callback: setLogin,
                   ),
                   const SizedBox(height: 10),
                   Padding(
@@ -192,63 +124,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: AppStyles.s14w400,
                     ),
                   ),
-                  TextFormField(
-                    controller: passwordController,
-                    maxLength: 16,
-                    obscureText: !passwordVisible,
-                    style: const TextStyle(
-                      letterSpacing: 4.0,
-                    ),
-                    decoration: InputDecoration(
-                      hintStyle: const TextStyle(
-                        letterSpacing: 0,
-                      ),
-                      counterText: "",
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                        ),
-                        child: SvgPicture.asset(
-                          AppAssets.svg.iconPassword,
-                          color: AppColors.icon,
-                        ),
-                      ),
-                      suffixIcon: passwordController.text.isNotEmpty
-                          ? Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    passwordVisible = !passwordVisible;
-                                  });
-                                },
-                                child: Icon(
-                                  passwordVisible
-                                      ? Icons.remove_red_eye_rounded
-                                      : Icons.remove_red_eye_outlined,
-                                ),
-                              ),
-                            )
-                          : const SizedBox.shrink(),
-                      filled: true,
-                      fillColor: AppColors.formBackground,
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      hintText: delegate.password,
-                    ),
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty || value.length < 8) {
-                        return delegate.inputErrorPasswordInShort;
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      setPassword(value);
-                    },
+                  PasswordFormWidget(
+                    passwordController: passwordController,
+                    callBackObscureText: toggleObscureText,
+                    obscureTextIsVisible: passwordVisible,
+                    callback: setPassword,
                   ),
                   const SizedBox(height: 24),
                   SizedBox(

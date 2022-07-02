@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "alien": MessageLookupByLibrary.simpleMessage("Инопланетянин"),
         "auth": MessageLookupByLibrary.simpleMessage("Авторизация"),
         "authErrorMessage": MessageLookupByLibrary.simpleMessage(
             "Введен неверные логин или пароль"),
@@ -36,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "english": MessageLookupByLibrary.simpleMessage("Английский"),
         "error": MessageLookupByLibrary.simpleMessage("Ошибка"),
         "findPerson": MessageLookupByLibrary.simpleMessage("Найти персонажа"),
+        "human": MessageLookupByLibrary.simpleMessage("Человек"),
         "inputErrorLoginInShort": MessageLookupByLibrary.simpleMessage(
             "Логин должен содержать не менее 3 символов"),
         "inputErrorPasswordInShort": MessageLookupByLibrary.simpleMessage(
@@ -48,16 +50,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "mainScreenTitle":
             MessageLookupByLibrary.simpleMessage("Главный экран"),
         "man": MessageLookupByLibrary.simpleMessage("Мужской"),
+        "noData": MessageLookupByLibrary.simpleMessage("Нет данных"),
         "ok": MessageLookupByLibrary.simpleMessage("Ок"),
         "password": MessageLookupByLibrary.simpleMessage("Пароль"),
-        "people": MessageLookupByLibrary.simpleMessage("Человек"),
         "personCount": MessageLookupByLibrary.simpleMessage("Всего персонажей"),
         "personScreenTitle":
             MessageLookupByLibrary.simpleMessage("Список персонажей"),
+        "personsListIsEmpty":
+            MessageLookupByLibrary.simpleMessage("Список персонажей пуст"),
         "russian": MessageLookupByLibrary.simpleMessage("Русский"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "signIn": MessageLookupByLibrary.simpleMessage("Войти"),
+        "somethingWentWrong":
+            MessageLookupByLibrary.simpleMessage("Что-то пошло не так :-("),
         "tryAgain": MessageLookupByLibrary.simpleMessage("Попробуйте снова"),
+        "unknown": MessageLookupByLibrary.simpleMessage("Неизвестный"),
         "woman": MessageLookupByLibrary.simpleMessage("Женский")
       };
 }

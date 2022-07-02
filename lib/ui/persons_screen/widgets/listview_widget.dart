@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nursik/constants/app_assets.dart';
 import 'package:nursik/constants/app_styles.dart';
-import 'package:nursik/dto/person_data.dart';
+import 'package:nursik/model/persons_data/persons_data.dart';
+import 'package:nursik/ui/app_widgets/user_avatar_widget.dart';
+import 'package:nursik/ui/persons_screen/view_model/person_screen_view_model.dart';
+import 'package:provider/provider.dart';
 
 class ListViewWidget extends StatelessWidget {
   const ListViewWidget({
@@ -9,41 +11,44 @@ class ListViewWidget extends StatelessWidget {
     required this.personsList,
   }) : super(key: key);
 
-  final List<PersonData> personsList;
+  final List<PersonsData> personsList;
 
   @override
   Widget build(BuildContext context) {
+    final model = context.watch<PersonScreenViewModel>();
     return ListView.separated(
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       itemCount: personsList.length,
       separatorBuilder: (BuildContext context, int index) {
-        return const SizedBox(height: 8);
+        return const SizedBox(height: 20);
       },
       itemBuilder: (BuildContext context, int index) {
         return Row(
           children: [
-            CircleAvatar(
-              radius: MediaQuery.of(context).size.width * .12,
-              backgroundImage: AssetImage(AppAssets.images.noAvatar),
+            UserAvatarWidget(
+              radius: MediaQuery.of(context).size.width * 0.10,
+              url: personsList[index].image,
             ),
             const SizedBox(width: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  personsList[index].status.toUpperCase(),
-                  style: personsList[index].status == 'Живой'
-                      ? AppStyles.s10w500StatusLive
-                      : AppStyles.s10w500StatusDead,
+                  model.statusLabel(personsList[index].status).toUpperCase(),
+                  style: AppStyles.s10w500.copyWith(
+                    color: model.statusColor(personsList[index].status),
+                  ),
                 ),
                 const SizedBox(height: 7),
                 Text(
-                  personsList[index].name,
+                  personsList[index].name!,
                   style: AppStyles.s16w500,
                 ),
                 const SizedBox(height: 7),
                 Text(
-                  personsList[index].race + ", " + personsList[index].gender,
+                  model.personSpecies(personsList[index].species) +
+                      ", " +
+                      model.personGender(personsList[index].gender),
                   style: AppStyles.s12w400,
                 ),
               ],

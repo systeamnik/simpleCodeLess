@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "alien": MessageLookupByLibrary.simpleMessage("Alien"),
         "auth": MessageLookupByLibrary.simpleMessage("Authorization"),
         "authErrorMessage": MessageLookupByLibrary.simpleMessage(
             "Invalid username or password entered"),
@@ -35,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "findPerson": MessageLookupByLibrary.simpleMessage("Find a character"),
+        "human": MessageLookupByLibrary.simpleMessage("People"),
         "inputErrorLoginInShort": MessageLookupByLibrary.simpleMessage(
             "Login must provide at least 3 characters"),
         "inputErrorPasswordInShort": MessageLookupByLibrary.simpleMessage(
@@ -46,16 +48,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "mainScreenTitle": MessageLookupByLibrary.simpleMessage("Main screen"),
         "man": MessageLookupByLibrary.simpleMessage("Male"),
+        "noData": MessageLookupByLibrary.simpleMessage("No data"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
-        "people": MessageLookupByLibrary.simpleMessage("People"),
         "personCount": MessageLookupByLibrary.simpleMessage("Total characters"),
         "personScreenTitle":
             MessageLookupByLibrary.simpleMessage("List of characters"),
+        "personsListIsEmpty":
+            MessageLookupByLibrary.simpleMessage("Persons list is empty"),
         "russian": MessageLookupByLibrary.simpleMessage("Russian"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "somethingWentWrong":
+            MessageLookupByLibrary.simpleMessage("Something went wrong :-("),
         "tryAgain": MessageLookupByLibrary.simpleMessage("Try again"),
+        "unknown": MessageLookupByLibrary.simpleMessage("unknown"),
         "woman": MessageLookupByLibrary.simpleMessage("Female")
       };
 }

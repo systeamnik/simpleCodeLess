@@ -3,76 +3,116 @@ import 'package:flutter_svg/svg.dart';
 import 'package:nursik/constants/app_assets.dart';
 import 'package:nursik/constants/app_colors.dart';
 import 'package:nursik/constants/app_styles.dart';
-import 'package:nursik/dto/person_data.dart';
 import 'package:nursik/generated/l10n.dart';
+import 'package:nursik/service/repo_persons.dart';
 import 'package:nursik/ui/persons_screen/widgets/gridview_widget.dart';
 import 'package:nursik/ui/persons_screen/widgets/listview_widget.dart';
+import 'package:nursik/ui/persons_screen/view_model/person_screen_view_model.dart';
 import 'package:nursik/ui/persons_screen/widgets/search_bar_widget.dart';
+import 'package:provider/provider.dart';
 
-class PersonsPageWidget extends StatefulWidget {
+class PersonsPageWidget extends StatelessWidget {
   const PersonsPageWidget({Key? key}) : super(key: key);
 
-  @override
-  State<PersonsPageWidget> createState() => _PersonsPageWidgetState();
-}
-
-class _PersonsPageWidgetState extends State<PersonsPageWidget> {
-  bool isListView = true;
-  final personsList = [
-    PersonData('', 'Живой', 'Рик Cанчез', 'Человек', 'Мужской'),
-    PersonData('', 'Живой', 'Директор Агентстваз', 'Человек', 'Мужской'),
-    PersonData('', 'Живой', 'Морти Смит', 'Человек', 'Мужской'),
-    PersonData('', 'Живой', 'Саммер Смит', 'Человек', 'Женский'),
-    PersonData('', 'Мертвый', 'Альберт Эйнштейн', 'Человек', 'Мужской'),
-    PersonData('', 'Мертвый', 'Алан Райлс', 'Человек', 'Мужской'),
-  ];
+  Widget create() {
+    return ChangeNotifierProvider(
+      create: (context) => PersonScreenViewModel(
+        repo: Provider.of<RepoPersons>(context, listen: false),
+      ),
+      child: const PersonsPageWidget(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    final model = context.watch<PersonScreenViewModel>();
+    final personTotal = model.filteredList.length;
     final delegate = S.of(context);
 
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SearchBarWidget(),
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    delegate.personCount.toUpperCase() +
-                        ": " +
-                        personsList.length.toString(),
-                    style: AppStyles.s10w500,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isListView = !isListView;
-                    });
-                  },
-                  icon: SvgPicture.asset(
-                    isListView
-                        ? AppAssets.svg.iconList
-                        : AppAssets.svg.iconGrid,
-                    width: 24,
-                    color: AppColors.icon,
-                  ),
-                ),
-              ],
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SearchBarWidget(
+              onChange: (String value) {
+                model.filter(value.toLowerCase());
+              },
             ),
-          ),
-          Expanded(
-            child: isListView
-                ? ListViewWidget(personsList: personsList)
-                : GridViewWidget(personsList: personsList),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      delegate.personCount.toUpperCase() +
+                          ": " +
+                          personTotal.toString(),
+                      style: AppStyles.s10w500.copyWith(
+                        letterSpacing: 1.5,
+                        color: AppColors.icon,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      model.switchView();
+                    },
+                    icon: SvgPicture.asset(
+                      model.isListView
+                          ? AppAssets.svg.iconList
+                          : AppAssets.svg.iconGrid,
+                      width: 24,
+                      color: AppColors.icon,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Consumer<PersonScreenViewModel>(
+              builder: ((context, model, _) {
+                if (model.isLoading) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      CircularProgressIndicator(),
+                    ],
+                  );
+                }
+                if (model.errorMessage != null) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Text(model.errorMessage!),
+                      )
+                    ],
+                  );
+                }
+                if (model.filteredList.isEmpty) {
+                  return Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Text(delegate.personsListIsEmpty),
+                        )
+                      ],
+                    ),
+                  );
+                }
+                return Expanded(
+                  child: model.isListView
+                      ? ListViewWidget(personsList: model.filteredList)
+                      : GridViewWidget(personsList: model.filteredList),
+                );
+              }),
+            ),
+          ],
+        ),
       ),
     );
   }

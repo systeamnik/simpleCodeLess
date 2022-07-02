@@ -6,7 +6,11 @@ import 'package:nursik/generated/l10n.dart';
 class SearchBarWidget extends StatelessWidget {
   const SearchBarWidget({
     Key? key,
+    required this.onChange,
   }) : super(key: key);
+
+  final ValueChanged<String>? onChange;
+
   @override
   Widget build(BuildContext context) {
     final delegate = S.of(context);
@@ -38,6 +42,7 @@ class SearchBarWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(100),
         ),
       ),
+      onChanged: onChange,
     );
   }
 }

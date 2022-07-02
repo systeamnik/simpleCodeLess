@@ -17,9 +17,11 @@
     "personScreenTitle": "List of characters",
     "findPerson": "Find a character",
     "personCount": "Total characters",
+    "personsListIsEmpty" : "Persons list is empty",
     "live": "Live",
     "dead": "Dead",
-    "people": "People",
+    "human": "People",
+    "alien": "Alien",
     "man": "Male",
     "woman": "Female",
 
@@ -30,6 +32,9 @@
     "authErrorMessage": "Invalid username or password entered",
 
     "character": "Characters",
-    "settings": "Settings"
+    "settings": "Settings",
 
+    "somethingWentWrong": "Something went wrong :-(",
+    "noData": "No data",
+    "unknown": "unknown"
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nursik/constants/app_colors.dart';
 import 'package:nursik/generated/l10n.dart';
+import 'package:nursik/service/repo_settings.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -50,6 +52,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                       ],
                       onChanged: (value) async {
+                        if (value == null) return;
                         if (value == 'ru_RU') {
                           await S.load(
                             const Locale('ru', 'RU'),
@@ -61,6 +64,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           );
                           setState(() {});
                         }
+                        final repoSettings = Provider.of<RepoSettings>(
+                          context,
+                          listen: false,
+                        );
+                        repoSettings.saveLocale(value);
                       },
                     ),
                   ],

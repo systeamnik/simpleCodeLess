@@ -220,6 +220,16 @@ class S {
     );
   }
 
+  /// `Persons list is empty`
+  String get personsListIsEmpty {
+    return Intl.message(
+      'Persons list is empty',
+      name: 'personsListIsEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Live`
   String get live {
     return Intl.message(
@@ -241,10 +251,20 @@ class S {
   }
 
   /// `People`
-  String get people {
+  String get human {
     return Intl.message(
       'People',
-      name: 'people',
+      name: 'human',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alien`
+  String get alien {
+    return Intl.message(
+      'Alien',
+      name: 'alien',
       desc: '',
       args: [],
     );
@@ -335,6 +355,36 @@ class S {
     return Intl.message(
       'Settings',
       name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong :-(`
+  String get somethingWentWrong {
+    return Intl.message(
+      'Something went wrong :-(',
+      name: 'somethingWentWrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No data`
+  String get noData {
+    return Intl.message(
+      'No data',
+      name: 'noData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `unknown`
+  String get unknown {
+    return Intl.message(
+      'unknown',
+      name: 'unknown',
       desc: '',
       args: [],
     );

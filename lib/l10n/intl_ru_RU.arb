@@ -17,9 +17,11 @@
     "personScreenTitle": "Список персонажей",
     "findPerson": "Найти персонажа",
     "personCount": "Всего персонажей",
+    "personsListIsEmpty": "Список персонажей пуст",
     "live" :"Живой",
     "dead" : "Мертвый",
-    "people" : "Человек",
+    "human" : "Человек",
+    "alien": "Инопланетянин",
     "man": "Мужской",
     "woman": "Женский",
 
@@ -30,8 +32,11 @@
     "authErrorMessage" : "Введен неверные логин или пароль",
 
     "character": "Персонажи",
-    "settings": "Настройки"
+    "settings": "Настройки",
 
+    "somethingWentWrong": "Что-то пошло не так :-(",
+    "noData": "Нет данных",
+    "unknown": "Неизвестный"
     
 
 }
