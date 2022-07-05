@@ -14,21 +14,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  void timeout() {
-    const duration = Duration(seconds: 2);
-
-    Future.delayed(
-      duration,
-    ).whenComplete(() {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
-        ),
-      );
-    });
-  }
-
   @override
   void initState() {
     final repoSettings = Provider.of<RepoSettings>(
@@ -42,7 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
         defaultLocale = const Locale('en');
       }
       S.load(defaultLocale).whenComplete(() {
-        timeout();
+        MaterialPageRoute(
+          builder: (context) => const LoginScreen(),
+        );
       });
     });
     super.initState();
@@ -52,36 +39,35 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
-      child: SafeArea(
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: Image.asset(
-                AppAssets.images.splashBackground,
-              ),
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              AppAssets.images.splashBackground,
+              fit: BoxFit.cover,
             ),
-            Positioned.fill(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    AppAssets.images.logo,
+          ),
+          Positioned.fill(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  AppAssets.images.logo,
+                ),
+                Expanded(
+                  child: Image.asset(
+                    AppAssets.images.splashMorty,
                   ),
-                  Expanded(
-                    child: Image.asset(
-                      AppAssets.images.splashMorty,
-                    ),
+                ),
+                Expanded(
+                  child: Image.asset(
+                    AppAssets.images.splashRick,
                   ),
-                  Expanded(
-                    child: Image.asset(
-                      AppAssets.images.splashRick,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

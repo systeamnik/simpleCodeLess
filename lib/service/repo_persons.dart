@@ -18,8 +18,6 @@ class RepoPersons {
           .toList();
       return ResultRepoPersons(personsList: personsList);
     } catch (error) {
-      // ignore: avoid_print
-      print('Error: $error');
       return ResultRepoPersons(errorMessage: S.current.somethingWentWrong);
     }
   }

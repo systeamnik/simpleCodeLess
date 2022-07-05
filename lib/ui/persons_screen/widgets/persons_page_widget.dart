@@ -75,11 +75,14 @@ class PersonsPageWidget extends StatelessWidget {
             Consumer<PersonScreenViewModel>(
               builder: ((context, model, _) {
                 if (model.isLoading) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      CircularProgressIndicator(),
-                    ],
+                  return Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const [
+                        CircularProgressIndicator(),
+                      ],
+                    ),
                   );
                 }
                 if (model.errorMessage != null) {

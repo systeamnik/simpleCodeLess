@@ -9,6 +9,7 @@ Future<void> main() async {
   await repoSettings.init();
   var defaultLocale = const Locale('ru', 'RU');
   final locale = await repoSettings.readLocale();
+
   if (locale == 'en') {
     defaultLocale = const Locale('en');
   }
