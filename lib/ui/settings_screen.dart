@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:nursik/constants/app_colors.dart';
 import 'package:nursik/generated/l10n.dart';
-import 'package:nursik/service/repo_settings.dart';
+import 'package:nursik/repo/repo_settings.dart';
+import 'package:nursik/ui/app_widgets/app_nav_bar_widger.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -19,6 +21,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: false,
@@ -29,6 +32,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: const AppNavBarWidget(currentPage: 1),
       body: Column(
         children: <Widget>[
           Expanded(

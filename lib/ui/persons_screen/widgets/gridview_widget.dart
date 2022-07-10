@@ -1,18 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:nursik/constants/app_colors.dart';
 import 'package:nursik/constants/app_styles.dart';
+import 'package:nursik/generated/l10n.dart';
 import 'package:nursik/model/persons_data/persons_data.dart';
 import 'package:nursik/ui/app_widgets/user_avatar_widget.dart';
-import 'package:nursik/ui/persons_screen/view_model/person_screen_view_model.dart';
-import 'package:provider/provider.dart';
 
 class GridViewWidget extends StatelessWidget {
   const GridViewWidget({Key? key, required this.personsList}) : super(key: key);
 
   final List<PersonsData> personsList;
 
+  Color _statusColor(String? status) {
+    if (status == 'Dead') return AppColors.avatarStatusDead;
+    if (status == 'Alive') return AppColors.avatarStatusLive;
+    return Colors.grey;
+  }
+
+  String _statusLabel(String? status) {
+    if (status == 'Dead') return S.current.dead;
+    if (status == 'Alive') return S.current.live;
+    return S.current.noData;
+  }
+
+  String _personSpecies(String? species) {
+    if (species == 'Human') return S.current.human;
+    if (species == 'Alien') return S.current.alien;
+    return S.current.unknown;
+  }
+
+  String _personGender(String? gender) {
+    if (gender == 'Male') return S.current.man;
+    if (gender == 'Female') return S.current.woman;
+    return S.current.unknown;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final model = context.read<PersonScreenViewModel>();
     return GridView.count(
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       crossAxisCount: 2,
@@ -34,9 +57,9 @@ class GridViewWidget extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              model.statusLabel(person.status).toUpperCase(),
+              _statusLabel(person.status).toUpperCase(),
               style: AppStyles.s10w500.copyWith(
-                color: model.statusColor(person.status),
+                color: _statusColor(person.status),
                 letterSpacing: 1.5,
               ),
             ),
@@ -49,9 +72,9 @@ class GridViewWidget extends StatelessWidget {
             ),
             const SizedBox(height: 2),
             Text(
-              model.personSpecies(person.species) +
+              _personSpecies(person.species) +
                   ", " +
-                  model.personGender(person.gender),
+                  _personGender(person.gender),
               style: AppStyles.s12w400,
             ),
           ],

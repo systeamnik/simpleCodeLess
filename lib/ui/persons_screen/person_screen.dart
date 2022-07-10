@@ -1,76 +1,154 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nursik/bloc/persons/bloc_persons.dart';
+import 'package:nursik/bloc/persons/events_bloc.dart';
+import 'package:nursik/bloc/persons/states_bloc.dart';
 import 'package:nursik/constants/app_assets.dart';
 import 'package:nursik/constants/app_colors.dart';
 import 'package:nursik/constants/app_styles.dart';
 import 'package:nursik/generated/l10n.dart';
-import 'package:nursik/service/repo_persons.dart';
-import 'package:nursik/ui/persons_screen/view_model/person_screen_view_model.dart';
-import 'package:nursik/ui/persons_screen/widgets/persons_page_widget.dart';
-import 'package:nursik/ui/settings_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:nursik/ui/app_widgets/app_nav_bar_widger.dart';
+import 'package:nursik/ui/persons_screen/widgets/gridview_widget.dart';
+import 'package:nursik/ui/persons_screen/widgets/listview_widget.dart';
+import 'package:nursik/ui/persons_screen/widgets/search_bar_widget.dart';
 
 class PersonScreen extends StatelessWidget {
   const PersonScreen({Key? key}) : super(key: key);
 
+  static final isListView = ValueNotifier(true);
+
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<PersonScreenViewModel>();
-    final delegate = S.of(context);
-
-    return ChangeNotifierProvider(
-      create: (context) => PersonScreenViewModel(
-        repo: Provider.of<RepoPersons>(context, listen: false),
-      ),
-      child: Scaffold(
-        backgroundColor: AppColors.screenBackgroundLight,
-        body: SafeArea(
-          child: PageView(
-            controller: model.pageController,
-            children: [
-              const PersonsPageWidget().create(),
-              const SettingsScreen(),
-            ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.dark,
+      child: Container(
+        color: Colors.white,
+        child: SafeArea(
+          bottom: false,
+          child: Scaffold(
+            bottomNavigationBar: const AppNavBarWidget(currentPage: 0),
+            body: GestureDetector(
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SearchBarWidget(
+                      onChange: (String value) {
+                        BlocProvider.of<BlocPersons>(context)
+                            .add(EventPersonsFilterByName(value));
+                      },
+                    ),
+                    BlocBuilder<BlocPersons, StateBlocPersons>(
+                      builder: (context, state) {
+                        var personsTotal = 0;
+                        if (state is StatePersonsData) {
+                          personsTotal = state.data.length;
+                        }
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  S.of(context).personCount.toUpperCase() +
+                                      ": " +
+                                      personsTotal.toString(),
+                                  style: AppStyles.s10w500.copyWith(
+                                    letterSpacing: 1.5,
+                                    color: AppColors.icon,
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  isListView.value = !isListView.value;
+                                },
+                                icon: SvgPicture.asset(
+                                  isListView.value == true
+                                      ? AppAssets.svg.iconList
+                                      : AppAssets.svg.iconGrid,
+                                  width: 24,
+                                  color: AppColors.icon,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    Expanded(
+                      child: BlocBuilder<BlocPersons, StateBlocPersons>(
+                        builder: ((context, state) {
+                          if (state is StatePersonsLoading) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: const [
+                                CircularProgressIndicator(),
+                              ],
+                            );
+                          }
+                          if (state is StatePersonsError) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Flexible(
+                                  child: Text(state.error),
+                                )
+                              ],
+                            );
+                          }
+                          if (state is StatePersonsData) {
+                            if (state.data.isEmpty) {
+                              return SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.60,
+                                // color: Colors.amber,
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        color: Colors.blue,
+                                      ),
+                                      Image.asset(
+                                        AppAssets.images.personsNotFound,
+                                      ),
+                                      const SizedBox(height: 20),
+                                      Text(
+                                        S.of(context).personsListIsEmpty,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return ValueListenableBuilder(
+                                valueListenable: isListView,
+                                builder: (context, isListViewMode, _) {
+                                  return isListViewMode == null
+                                      ? ListViewWidget(personsList: state.data)
+                                      : GridViewWidget(personsList: state.data);
+                                },
+                              );
+                            }
+                          }
+                          return const SizedBox.shrink();
+                        }),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedFontSize: AppStyles.bottomAppBarTitleSize,
-          unselectedFontSize: AppStyles.bottomAppBarTitleSize,
-          onTap: model.onTapped,
-          type: BottomNavigationBarType.fixed,
-          currentIndex: model.selectedIndex,
-          items: [
-            BottomNavigationBarItem(
-              activeIcon: Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: SvgPicture.asset(
-                  AppAssets.svg.iconPerson,
-                  color: AppColors.primary,
-                ),
-              ),
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: SvgPicture.asset(
-                  AppAssets.svg.iconPerson,
-                ),
-              ),
-              label: delegate.character,
-            ),
-            BottomNavigationBarItem(
-              activeIcon: Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: SvgPicture.asset(
-                  AppAssets.svg.iconSetting,
-                  color: AppColors.primary,
-                ),
-              ),
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: SvgPicture.asset(AppAssets.svg.iconSetting),
-              ),
-              label: delegate.settings,
-            ),
-          ],
         ),
       ),
     );

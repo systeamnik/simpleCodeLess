@@ -11,6 +11,7 @@ class _Images {
   final String splashBackground = 'assets/images/bitmap/splash_bg.png';
   final String splashMorty = 'assets/images/bitmap/splash_screen_morty.png';
   final String splashRick = 'assets/images/bitmap/splash_screen_rick.png';
+  final String personsNotFound = 'assets/images/bitmap/persons-not-found.png';
 }
 
 class _Svg {

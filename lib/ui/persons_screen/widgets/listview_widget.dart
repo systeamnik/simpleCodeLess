@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:nursik/constants/app_colors.dart';
 import 'package:nursik/constants/app_styles.dart';
+import 'package:nursik/generated/l10n.dart';
 import 'package:nursik/model/persons_data/persons_data.dart';
 import 'package:nursik/ui/app_widgets/user_avatar_widget.dart';
-import 'package:nursik/ui/persons_screen/view_model/person_screen_view_model.dart';
-import 'package:provider/provider.dart';
 
 class ListViewWidget extends StatelessWidget {
   const ListViewWidget({
@@ -13,9 +13,32 @@ class ListViewWidget extends StatelessWidget {
 
   final List<PersonsData> personsList;
 
+  Color _statusColor(String? status) {
+    if (status == 'Dead') return AppColors.avatarStatusDead;
+    if (status == 'Alive') return AppColors.avatarStatusLive;
+    return Colors.grey;
+  }
+
+  String _statusLabel(String? status) {
+    if (status == 'Dead') return S.current.dead;
+    if (status == 'Alive') return S.current.live;
+    return S.current.noData;
+  }
+
+  String _personSpecies(String? species) {
+    if (species == 'Human') return S.current.human;
+    if (species == 'Alien') return S.current.alien;
+    return S.current.unknown;
+  }
+
+  String _personGender(String? gender) {
+    if (gender == 'Male') return S.current.man;
+    if (gender == 'Female') return S.current.woman;
+    return S.current.unknown;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<PersonScreenViewModel>();
     return ListView.separated(
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       itemCount: personsList.length,
@@ -34,9 +57,9 @@ class ListViewWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  model.statusLabel(personsList[index].status).toUpperCase(),
+                  _statusLabel(personsList[index].status).toUpperCase(),
                   style: AppStyles.s10w500.copyWith(
-                    color: model.statusColor(personsList[index].status),
+                    color: _statusColor(personsList[index].status),
                   ),
                 ),
                 const SizedBox(height: 7),
@@ -46,9 +69,9 @@ class ListViewWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 7),
                 Text(
-                  model.personSpecies(personsList[index].species) +
+                  _personSpecies(personsList[index].species) +
                       ", " +
-                      model.personGender(personsList[index].gender),
+                      _personGender(personsList[index].gender),
                   style: AppStyles.s12w400,
                 ),
               ],

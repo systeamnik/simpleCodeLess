@@ -11,7 +11,7 @@ class AppColors {
   static const avatarStatusDead = Color(0xFFEB5757);
   static const avatarTitle = Color(0xFF0B1E2D);
   static const appBarTitle = Color(0xFF0B1E2D);
-  static const splashBackground = Color(0xFF0B1E2D);
+  static const splashBackground = Color(0xFF091824);
   static const avatarSubTitle = Color(0xFF828282);
 
   static const formBackground = Color(0xFFF2F2F2);

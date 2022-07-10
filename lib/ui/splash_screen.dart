@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nursik/constants/app_assets.dart';
 import 'package:nursik/generated/l10n.dart';
-import 'package:nursik/service/repo_settings.dart';
+import 'package:nursik/repo/repo_settings.dart';
 import 'package:nursik/ui/login_screen/login_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -27,8 +27,10 @@ class _SplashScreenState extends State<SplashScreen> {
         defaultLocale = const Locale('en');
       }
       S.load(defaultLocale).whenComplete(() {
-        MaterialPageRoute(
-          builder: (context) => const LoginScreen(),
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const LoginScreen(),
+          ),
         );
       });
     });
