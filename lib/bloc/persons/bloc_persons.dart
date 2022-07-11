@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nursik/bloc/persons/events_bloc.dart';
 import 'package:nursik/bloc/persons/states_bloc.dart';
@@ -9,6 +12,8 @@ class BlocPersons extends Bloc<EventBlocPersons, StateBlocPersons> {
   BlocPersons({
     required this.repo,
   }) : super(StatePersonsInitial()) {
+    Timer? searchOnStoppedTyping;
+
     on<EventPersonsFilterByName>(
       ((event, emit) async {
         emit(StatePersonsLoading());
@@ -24,5 +29,21 @@ class BlocPersons extends Bloc<EventBlocPersons, StateBlocPersons> {
         );
       }),
     );
+
+    on<EventReadAll>((event, emit) {
+      const _duration = Duration(seconds: 1);
+
+      if (searchOnStoppedTyping != null) {
+        // log("cancel timer");
+        if (searchOnStoppedTyping!.isActive) {
+          log("cancel timer");
+          searchOnStoppedTyping!.cancel();
+        }
+      }
+
+      searchOnStoppedTyping = Timer(_duration, () async {
+        log("searchOnStoppedTyping start");
+      });
+    });
   }
 }

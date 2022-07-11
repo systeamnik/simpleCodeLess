@@ -40,6 +40,8 @@ class PersonScreen extends StatelessWidget {
                       onChange: (String value) {
                         BlocProvider.of<BlocPersons>(context)
                             .add(EventPersonsFilterByName(value));
+                        BlocProvider.of<BlocPersons>(context)
+                            .add(EventReadAll(300));
                       },
                     ),
                     BlocBuilder<BlocPersons, StateBlocPersons>(
@@ -49,7 +51,7 @@ class PersonScreen extends StatelessWidget {
                           personsTotal = state.data.length;
                         }
                         return Padding(
-                          padding: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -68,12 +70,16 @@ class PersonScreen extends StatelessWidget {
                                 onPressed: () {
                                   isListView.value = !isListView.value;
                                 },
-                                icon: SvgPicture.asset(
-                                  isListView.value == true
-                                      ? AppAssets.svg.iconList
-                                      : AppAssets.svg.iconGrid,
-                                  width: 24,
-                                  color: AppColors.icon,
+                                icon: ValueListenableBuilder<bool>(
+                                  valueListenable: isListView,
+                                  builder: (context, isListViewMode, _) {
+                                    return isListViewMode
+                                        ? SvgPicture.asset(
+                                            AppAssets.svg.iconList,
+                                          )
+                                        : SvgPicture.asset(
+                                            AppAssets.svg.iconGrid);
+                                  },
                                 ),
                               ),
                             ],
@@ -108,7 +114,6 @@ class PersonScreen extends StatelessWidget {
                               return SizedBox(
                                 height:
                                     MediaQuery.of(context).size.height * 0.60,
-                                // color: Colors.amber,
                                 child: Center(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -130,10 +135,10 @@ class PersonScreen extends StatelessWidget {
                                 ),
                               );
                             } else {
-                              return ValueListenableBuilder(
+                              return ValueListenableBuilder<bool>(
                                 valueListenable: isListView,
                                 builder: (context, isListViewMode, _) {
-                                  return isListViewMode == null
+                                  return isListViewMode
                                       ? ListViewWidget(personsList: state.data)
                                       : GridViewWidget(personsList: state.data);
                                 },

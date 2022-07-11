@@ -52,7 +52,7 @@ class ListViewWidget extends StatelessWidget {
               radius: MediaQuery.of(context).size.width * 0.10,
               url: personsList[index].image,
             ),
-            const SizedBox(width: 20),
+            const SizedBox(width: 15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -66,6 +66,9 @@ class ListViewWidget extends StatelessWidget {
                 Text(
                   personsList[index].name!,
                   style: AppStyles.s16w500,
+                  overflow: TextOverflow.fade,
+                  maxLines: 1,
+                  softWrap: false,
                 ),
                 const SizedBox(height: 7),
                 Text(

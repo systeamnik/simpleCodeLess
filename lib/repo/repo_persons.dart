@@ -1,27 +1,28 @@
-import 'dart:convert';
-import 'dart:developer';
-
-import 'package:http/http.dart' as http;
 import 'package:nursik/generated/l10n.dart';
 import 'package:nursik/model/persons_data/persons_data.dart';
+import 'package:nursik/repo/api.dart';
 
 class RepoPersons {
+  final Api api;
+
+  RepoPersons({required this.api});
   Future<ResultRepoPersons> filterByName(String name) async {
     try {
-      final url =
-          Uri.parse('https://rickandmortyapi.com/api/character/?name=$name');
-      final result = await http.get(url);
-      final data = jsonDecode(result.body);
-      final List personsListJson = data['results'] ?? [];
-
-      final List<PersonsData> personsList = personsListJson
+      final result = await api.dio.get(
+        '/character/',
+        queryParameters: {
+          'name': name,
+        },
+      );
+      final List personsListJson = result.data['results'] ?? [];
+      final personsList = personsListJson
           .map(
-            (item) => PersonsData.fromJson(item),
+            (e) => PersonsData.fromJson(e),
           )
           .toList();
       return ResultRepoPersons(personsList: personsList);
     } catch (error) {
-      log('error: $error');
+      // log('error: $error');
       return ResultRepoPersons(
         errorMessage: S.current.somethingWentWrong,
       );
