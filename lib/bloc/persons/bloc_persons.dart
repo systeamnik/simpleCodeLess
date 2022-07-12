@@ -16,35 +16,39 @@ class BlocPersons extends Bloc<EventBlocPersons, StateBlocPersons> {
 
     on<EventPersonsFilterByName>(
       ((event, emit) async {
-        emit(StatePersonsLoading());
-        final result = await repo.filterByName(event.name);
-        if (result.errorMessage != null) {
-          emit(
-            StatePersonsError(result.errorMessage!),
-          );
-          return;
+        final _timer = event.time;
+        final _duration = Duration(milliseconds: _timer);
+
+        if (searchOnStoppedTyping != null) {
+          if (searchOnStoppedTyping!.isActive) {
+            log("cancel timer");
+            searchOnStoppedTyping!.cancel();
+          }
         }
-        emit(
-          StatePersonsData(data: result.personsList!),
-        );
+
+        searchOnStoppedTyping = Timer(_duration, () async {
+          log("searchOnStoppedTyping start");
+
+          await repo.filterByName(event.name).then((value) {
+            add(EventReadAll(event.name));
+          });
+        });
       }),
     );
 
-    on<EventReadAll>((event, emit) {
-      final _timer = event.time;
-      final _duration = Duration(milliseconds: _timer);
+    on<EventReadAll>((event, emit) async {
+      emit(StatePersonsLoading());
 
-      if (searchOnStoppedTyping != null) {
-        // log("cancel timer");
-        if (searchOnStoppedTyping!.isActive) {
-          log("cancel timer");
-          searchOnStoppedTyping!.cancel();
-        }
+      final result = await repo.filterByName(event.name);
+      if (result.errorMessage != null) {
+        emit(
+          StatePersonsError(result.errorMessage!),
+        );
+        return;
       }
-
-      searchOnStoppedTyping = Timer(_duration, () async {
-        log("searchOnStoppedTyping start");
-      });
+      emit(
+        StatePersonsData(data: result.personsList!),
+      );
     });
   }
 }

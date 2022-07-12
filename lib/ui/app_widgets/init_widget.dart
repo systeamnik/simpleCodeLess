@@ -34,7 +34,7 @@ class InitWidget extends StatelessWidget {
           BlocProvider<BlocPersons>(
             create: (context) => BlocPersons(
               repo: RepositoryProvider.of(context),
-            )..add(EventPersonsFilterByName('')),
+            )..add(EventReadAll('')),
           )
         ],
         child: child,
