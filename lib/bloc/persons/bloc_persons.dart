@@ -32,7 +32,7 @@ class BlocPersons extends Bloc<EventBlocPersons, StateBlocPersons> {
 
     on<EventReadAll>((event, emit) {
       final _timer = event.time;
-      final _duration = Duration(seconds: _timer);
+      final _duration = Duration(milliseconds: _timer);
 
       if (searchOnStoppedTyping != null) {
         // log("cancel timer");

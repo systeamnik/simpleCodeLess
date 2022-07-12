@@ -38,10 +38,10 @@ class PersonScreen extends StatelessWidget {
                   children: [
                     SearchBarWidget(
                       onChange: (String value) {
+                        // BlocProvider.of<BlocPersons>(context)
+                        //     .add(EventPersonsFilterByName(value));
                         BlocProvider.of<BlocPersons>(context)
-                            .add(EventPersonsFilterByName(value));
-                        BlocProvider.of<BlocPersons>(context)
-                            .add(EventReadAll(300));
+                            .add(EventReadAll(500));
                       },
                     ),
                     BlocBuilder<BlocPersons, StateBlocPersons>(
