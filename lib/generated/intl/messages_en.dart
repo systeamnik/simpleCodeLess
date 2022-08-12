@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have an account yet?"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
+        "findLocation": MessageLookupByLibrary.simpleMessage("Найти локацию"),
         "findPerson": MessageLookupByLibrary.simpleMessage("Find a character"),
         "human": MessageLookupByLibrary.simpleMessage("People"),
         "inputErrorLoginInShort": MessageLookupByLibrary.simpleMessage(
@@ -45,6 +46,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter your login and password"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "live": MessageLookupByLibrary.simpleMessage("Live"),
+        "location": MessageLookupByLibrary.simpleMessage("Location"),
+        "locationCount":
+            MessageLookupByLibrary.simpleMessage("Total locations"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "mainScreenTitle": MessageLookupByLibrary.simpleMessage("Main screen"),
         "man": MessageLookupByLibrary.simpleMessage("Male"),
@@ -56,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("List of characters"),
         "personsListIsEmpty":
             MessageLookupByLibrary.simpleMessage("Persons list is empty"),
+        "premiere": MessageLookupByLibrary.simpleMessage("Premiere"),
         "russian": MessageLookupByLibrary.simpleMessage("Russian"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),

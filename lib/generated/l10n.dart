@@ -210,11 +210,31 @@ class S {
     );
   }
 
+  /// `Найти локацию`
+  String get findLocation {
+    return Intl.message(
+      'Найти локацию',
+      name: 'findLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Total characters`
   String get personCount {
     return Intl.message(
       'Total characters',
       name: 'personCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total locations`
+  String get locationCount {
+    return Intl.message(
+      'Total locations',
+      name: 'locationCount',
       desc: '',
       args: [],
     );
@@ -360,6 +380,16 @@ class S {
     );
   }
 
+  /// `Location`
+  String get location {
+    return Intl.message(
+      'Location',
+      name: 'location',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Something went wrong :-(`
   String get somethingWentWrong {
     return Intl.message(
@@ -375,6 +405,16 @@ class S {
     return Intl.message(
       'No data',
       name: 'noData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Premiere`
+  String get premiere {
+    return Intl.message(
+      'Premiere',
+      name: 'premiere',
       desc: '',
       args: [],
     );

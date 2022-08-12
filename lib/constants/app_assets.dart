@@ -22,4 +22,5 @@ class _Svg {
   final String iconSetting = 'assets/images/svg/setting.svg';
   final String iconList = 'assets/images/svg/list.svg';
   final String iconGrid = 'assets/images/svg/grid.svg';
+  final String iconLocation = 'assets/images/svg/location.svg';
 }

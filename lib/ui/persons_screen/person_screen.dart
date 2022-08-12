@@ -24,7 +24,7 @@ class PersonScreen extends StatelessWidget {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
       child: Container(
-        color: Colors.white,
+        color: AppColors.screenBackgroundLight,
         child: SafeArea(
           bottom: false,
           child: Scaffold(
@@ -37,6 +37,7 @@ class PersonScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SearchBarWidget(
+                      placeholder: S.of(context).findPerson,
                       onChange: (String value) {
                         BlocProvider.of<BlocPersons>(context)
                             .add(EventPersonsFilterByName(value, 1000));
@@ -88,62 +89,64 @@ class PersonScreen extends StatelessWidget {
                     Expanded(
                       child: BlocBuilder<BlocPersons, StateBlocPersons>(
                         builder: ((context, state) {
-                          if (state is StatePersonsLoading) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                CircularProgressIndicator(),
-                              ],
-                            );
-                          }
-                          if (state is StatePersonsError) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Flexible(
-                                  child: Text(state.error),
-                                )
-                              ],
-                            );
-                          }
-                          if (state is StatePersonsData) {
-                            if (state.data.isEmpty) {
-                              return SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.60,
-                                child: Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        color: Colors.blue,
+                          return state.when(
+                              initial: () => const SizedBox.shrink(),
+                              loading: () {
+                                return Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: const [
+                                    CircularProgressIndicator(),
+                                  ],
+                                );
+                              },
+                              data: (data) {
+                                if (data.isEmpty) {
+                                  return SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.60,
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            color: Colors.blue,
+                                          ),
+                                          Image.asset(
+                                            AppAssets.images.personsNotFound,
+                                          ),
+                                          const SizedBox(height: 20),
+                                          Text(
+                                            S.of(context).personsListIsEmpty,
+                                          ),
+                                        ],
                                       ),
-                                      Image.asset(
-                                        AppAssets.images.personsNotFound,
-                                      ),
-                                      const SizedBox(height: 20),
-                                      Text(
-                                        S.of(context).personsListIsEmpty,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            } else {
-                              return ValueListenableBuilder<bool>(
-                                valueListenable: isListView,
-                                builder: (context, isListViewMode, _) {
-                                  return isListViewMode
-                                      ? ListViewWidget(personsList: state.data)
-                                      : GridViewWidget(personsList: state.data);
-                                },
-                              );
-                            }
-                          }
-                          return const SizedBox.shrink();
+                                    ),
+                                  );
+                                } else {
+                                  return ValueListenableBuilder<bool>(
+                                    valueListenable: isListView,
+                                    builder: (context, isListViewMode, _) {
+                                      return isListViewMode
+                                          ? ListViewWidget(personsList: data)
+                                          : GridViewWidget(personsList: data);
+                                    },
+                                  );
+                                }
+                              },
+                              error: (error) {
+                                return Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Flexible(
+                                      child: Text(error + ' dwdw'),
+                                    )
+                                  ],
+                                );
+                              });
                         }),
                       ),
                     ),

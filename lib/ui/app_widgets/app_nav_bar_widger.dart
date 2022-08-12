@@ -4,6 +4,7 @@ import 'package:nursik/constants/app_assets.dart';
 import 'package:nursik/constants/app_colors.dart';
 import 'package:nursik/constants/app_styles.dart';
 import 'package:nursik/generated/l10n.dart';
+import 'package:nursik/ui/location_screen/location_screen.dart';
 import 'package:nursik/ui/persons_screen/person_screen.dart';
 import 'package:nursik/ui/settings_screen.dart';
 
@@ -43,6 +44,20 @@ class AppNavBarWidget extends StatelessWidget {
           activeIcon: Padding(
             padding: const EdgeInsets.only(bottom: 5),
             child: SvgPicture.asset(
+              AppAssets.svg.iconLocation,
+              color: AppColors.primary,
+            ),
+          ),
+          icon: Padding(
+            padding: const EdgeInsets.only(bottom: 5),
+            child: SvgPicture.asset(AppAssets.svg.iconLocation),
+          ),
+          label: S.of(context).location,
+        ),
+        BottomNavigationBarItem(
+          activeIcon: Padding(
+            padding: const EdgeInsets.only(bottom: 5),
+            child: SvgPicture.asset(
               AppAssets.svg.iconSetting,
               color: AppColors.primary,
             ),
@@ -66,6 +81,14 @@ class AppNavBarWidget extends StatelessWidget {
             (route) => false,
           );
         } else if (index == 1) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              PageRouteBuilder(
+                pageBuilder: ((context, animation, secondaryAnimation) =>
+                    const LocationScreen()),
+              ),
+              (route) => false);
+        } else if (index == 2) {
           Navigator.pushAndRemoveUntil(
               context,
               PageRouteBuilder(

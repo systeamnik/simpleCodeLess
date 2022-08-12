@@ -2,26 +2,25 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nursik/bloc/persons/events_bloc.dart';
-import 'package:nursik/bloc/persons/states_bloc.dart';
-import 'package:nursik/repo/repo_persons.dart';
+import 'package:nursik/bloc/locations/events_bloc.dart';
+import 'package:nursik/bloc/locations/states_bloc.dart';
+import 'package:nursik/repo/repo_locations.dart';
 
-class BlocPersons extends Bloc<EventBlocPersons, StateBlocPersons> {
-  final RepoPersons repo;
+class BlocLocations extends Bloc<EventBlocLocations, StateBlocLocations> {
+  final RepoLocations repo;
 
-  BlocPersons({
+  BlocLocations({
     required this.repo,
-  }) : super(const StateBlocPersons.initial()) {
+  }) : super(const StateBlocLocations.initial()) {
     Timer? timer;
 
-    on<EventPersonsFilterByName>(
+    on<EventLocationsFilterByName>(
       ((event, emit) async {
         final _timer = event.time;
         final _duration = Duration(milliseconds: _timer);
 
         if (timer != null) {
           if (timer!.isActive) {
-            // log("cancel timer");
             timer!.cancel();
           }
         }
@@ -32,24 +31,24 @@ class BlocPersons extends Bloc<EventBlocPersons, StateBlocPersons> {
           await repo.filterByName(event.name).then((value) {
             // emit(StatePersonsLoading());
 
-            add(EventReadAll(event.name));
+            add(EventLocationsAll(event.name));
           });
         });
       }),
     );
 
-    on<EventReadAll>((event, emit) async {
-      emit(const StatePersonsLoading());
+    on<EventLocationsAll>((event, emit) async {
+      emit(const StateLocationLoading());
 
       final result = await repo.filterByName(event.name);
       if (result.errorMessage != null) {
         emit(
-          StatePersonsError(result.errorMessage!),
+          StateLocationsError(result.errorMessage!),
         );
         return;
       }
       emit(
-        StatePersonsData(data: result.personsList!),
+        StateLocationData(data: result.locationsList!),
       );
     });
   }

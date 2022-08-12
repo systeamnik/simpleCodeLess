@@ -16,7 +16,10 @@
 
     "personScreenTitle": "Список персонажей",
     "findPerson": "Найти персонажа",
+    "findLocation": "Найти локацию",
+
     "personCount": "Всего персонажей",
+    "locationCount": "Всего локации",
     "personsListIsEmpty": "Список персонажей пуст",
     "live" :"Живой",
     "dead" : "Мертвый",
@@ -33,9 +36,12 @@
 
     "character": "Персонажи",
     "settings": "Настройки",
+    "location": "Локации",
 
     "somethingWentWrong": "Что-то пошло не так :-(",
     "noData": "Нет данных",
+    "premiere": "Премьера",
+    
     "unknown": "Неизвестный"
     
 

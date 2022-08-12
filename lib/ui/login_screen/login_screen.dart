@@ -4,10 +4,12 @@ import 'package:nursik/constants/app_assets.dart';
 import 'package:nursik/constants/app_colors.dart';
 import 'package:nursik/constants/app_styles.dart';
 import 'package:nursik/generated/l10n.dart';
+import 'package:nursik/repo/repo_settings.dart';
 import 'package:nursik/ui/app_widgets/alert_dialog_widget.dart';
 import 'package:nursik/ui/login_screen/widgets/login_form_widget.dart';
 import 'package:nursik/ui/login_screen/widgets/password_form_widget.dart';
 import 'package:nursik/ui/persons_screen/person_screen.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -42,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  void authButtonPressed(BuildContext context) {
+  void authButtonPressed(BuildContext context) async {
     FocusScope.of(context).unfocus();
     final isValidForm = formKey.currentState?.validate();
     if (isValidForm ?? false) {
@@ -54,6 +56,10 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           (route) => false,
         );
+        Provider.of<RepoSettings>(
+          context,
+          listen: false,
+        ).authorized();
       } else {
         showAlertDialog(context);
       }

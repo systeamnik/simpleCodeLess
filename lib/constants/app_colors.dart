@@ -4,6 +4,10 @@ class AppColors {
   static const screenBackgroundLight = Color(0xFFFCFCFC);
 
   static const primary = Color(0xFF22A2BD);
+  static const darkText = Color(0xFF0B1E2D);
+  static const darkSubText = Color(0xFF5B6975);
+  static const lightText = Color(0xFFFCFCFC);
+  static const lightSubText = Color(0xFF5B6975);
 
   static const header = Color(0xFF828282);
   static const icon = Color(0xFF5B6975);

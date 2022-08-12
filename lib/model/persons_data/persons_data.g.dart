@@ -6,7 +6,8 @@ part of 'persons_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PersonsData _$PersonsDataFromJson(Map<String, dynamic> json) => PersonsData(
+_$_PersonsData _$$_PersonsDataFromJson(Map<String, dynamic> json) =>
+    _$_PersonsData(
       id: json['id'] as int?,
       name: json['name'] as String?,
       status: json['status'] as String?,
@@ -28,7 +29,7 @@ PersonsData _$PersonsDataFromJson(Map<String, dynamic> json) => PersonsData(
           : DateTime.parse(json['created'] as String),
     );
 
-Map<String, dynamic> _$PersonsDataToJson(PersonsData instance) =>
+Map<String, dynamic> _$$_PersonsDataToJson(_$_PersonsData instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
