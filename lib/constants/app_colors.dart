@@ -8,6 +8,8 @@ class AppColors {
   static const darkSubText = Color(0xFF5B6975);
   static const lightText = Color(0xFFFCFCFC);
   static const lightSubText = Color(0xFF5B6975);
+  static const gradientLeft = Color(0xFF2bc0e4);
+  static const gradientRight = Color(0xFFeaecc6);
 
   static const header = Color(0xFF828282);
   static const icon = Color(0xFF5B6975);

@@ -41,8 +41,14 @@
     "somethingWentWrong": "Что-то пошло не так :-(",
     "noData": "Нет данных",
     "premiere": "Премьера",
+    "episodes": "эпизоды",
+    "episodesListIsEmpty": "Cписок пуст",
+    "aired": "Эфир",
+    
+    
     
     "unknown": "Неизвестный"
+
     
 
 }

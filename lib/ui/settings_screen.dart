@@ -32,7 +32,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: const AppNavBarWidget(currentPage: 2),
+      bottomNavigationBar: const AppNavBarWidget(currentPage: 3),
       body: Column(
         children: <Widget>[
           Expanded(

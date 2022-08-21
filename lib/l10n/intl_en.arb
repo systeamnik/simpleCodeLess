@@ -40,6 +40,9 @@
     "somethingWentWrong": "Something went wrong :-(",
     "noData": "No data",
     "premiere": "Premiere",
+    "episodes": "Episodes",
+    "episodesListIsEmpty": "Episodes list is empty",
+    "aired": "Aired",
     
     "unknown": "unknown"
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nursik/bloc/episodes/bloc_episodes.dart';
+import 'package:nursik/bloc/episodes/events_bloc.dart';
 import 'package:nursik/bloc/locations/bloc_location.dart';
 import 'package:nursik/bloc/locations/events_bloc.dart';
 import 'package:nursik/bloc/persons/bloc_persons.dart';
 import 'package:nursik/bloc/persons/events_bloc.dart';
 import 'package:nursik/repo/api.dart';
+import 'package:nursik/repo/repo_episodes.dart';
 import 'package:nursik/repo/repo_locations.dart';
 import 'package:nursik/repo/repo_persons.dart';
 import 'package:nursik/repo/repo_settings.dart';
@@ -36,6 +39,11 @@ class InitWidget extends StatelessWidget {
             api: RepositoryProvider.of<Api>(context),
           ),
         ),
+        RepositoryProvider(
+          create: (context) => RepoEpisodes(
+            api: RepositoryProvider.of<Api>(context),
+          ),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -48,6 +56,11 @@ class InitWidget extends StatelessWidget {
             create: (context) => BlocLocations(
               repo: RepositoryProvider.of(context),
             )..add(EventLocationsAll('')),
+          ),
+          BlocProvider(
+            create: (context) => BlocEpisodes(
+              repo: RepositoryProvider.of<RepoEpisodes>(context),
+            )..add(EventEpisodesFetch()),
           ),
         ],
         child: child,

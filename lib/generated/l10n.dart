@@ -420,6 +420,36 @@ class S {
     );
   }
 
+  /// `Episodes`
+  String get episodes {
+    return Intl.message(
+      'Episodes',
+      name: 'episodes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Episodes list is empty`
+  String get episodesListIsEmpty {
+    return Intl.message(
+      'Episodes list is empty',
+      name: 'episodesListIsEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aired`
+  String get aired {
+    return Intl.message(
+      'Aired',
+      name: 'aired',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `unknown`
   String get unknown {
     return Intl.message(
