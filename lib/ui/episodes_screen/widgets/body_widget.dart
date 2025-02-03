@@ -13,6 +13,7 @@ class BodyWidget extends StatelessWidget {
   const BodyWidget({Key? key, required this.data}) : super(key: key);
 
   final List<EpisodeData> data;
+
   @override
   Widget build(BuildContext context) {
     if (data.isEmpty) {

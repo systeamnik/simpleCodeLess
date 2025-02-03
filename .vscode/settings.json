@@ -1,3 +1,8 @@
 {
-    "dart.flutterSdkPath": "/Users/atomozen/development/flutter"
+    "dart.flutterSdkPath": "/Users/atomozen/development/flutter",
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#1D3405",
+        "titleBar.activeBackground": "#294807",
+        "titleBar.activeForeground": "#F5FDEC"
+    }
 }

@@ -14,12 +14,11 @@ class RepoLocations {
           'name': name,
         },
       );
+
       final List personsListJson = result.data['results'] ?? [];
-      final personsList = personsListJson
-          .map(
-            (e) => Location.fromJson(e),
-          )
-          .toList();
+      print(personsListJson);
+      final personsList =
+          personsListJson.map((e) => Location.fromJson(e)).toList();
       return ResultRepoLocations(locationsList: personsList);
     } catch (error) {
       // log('error: $error');

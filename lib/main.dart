@@ -1,5 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nursik/api/firebase_api.dart';
 import 'package:nursik/constants/app_colors.dart';
 import 'package:nursik/ui/app_widgets/init_widget.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -8,6 +10,8 @@ import 'generated/l10n.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await FirebaseApi().init();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: AppColors.splashBackground,

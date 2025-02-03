@@ -77,7 +77,8 @@ class PersonScreen extends StatelessWidget {
                                             AppAssets.svg.iconList,
                                           )
                                         : SvgPicture.asset(
-                                            AppAssets.svg.iconGrid);
+                                            AppAssets.svg.iconGrid,
+                                          );
                                   },
                                 ),
                               ),

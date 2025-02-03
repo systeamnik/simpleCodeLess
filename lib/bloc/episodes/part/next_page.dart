@@ -5,6 +5,14 @@ extension NextPage on BlocEpisodes {
     EventEpisodesNextPage event,
     Emitter<StateBlocEpisodes> emit,
   ) async {
+    //индикатор окончания данных, чтобы не запрашивать
+    //следующую страницу если текущая является последней
+    // bool _isEndOfData = false;
+
+    //индикатор того, что запрос в процессе исполнения
+    //нужен чтобы избежать параллельных запросов
+    // bool _isInProgress = false;
+
     if (_isEndOfData) return;
     if (_isInProgress) return;
     _isInProgress = true;
