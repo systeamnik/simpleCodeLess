@@ -28,6 +28,8 @@ class AppColors {
 
   static const buttonBackground = Color(0xFF22A2BD);
   static const linkText = Color(0xFF43D049);
-  
-    static const newColorGitTest = Colors.red;
+
+  static const newColorGitTest = Colors.red;
+
+  static const newColorGitTestTwo = Colors.blue;
 }
